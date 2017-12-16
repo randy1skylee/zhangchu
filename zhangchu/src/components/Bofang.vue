@@ -10,7 +10,7 @@
             <video poster="../assets/img_sh/B_banner.jpg">
                 <source src="http://video.szzhangchu.com/bohejiangzuohuotuihanbaoA.mp4" type="">
             </video>
-            <span></span>
+            <span @click = "play()"></span>
         </div>
         <div class="shB_video-bar">
             <a href="###" class="shB_Vplay">
@@ -274,22 +274,28 @@
 <script>
 	export default {
 		data(){
-                return{
-                    doList:{}
-                }
-            },
-            created(){
-                this.$http.get("http://api.izhangchu.com/",{
-                    params:{
-                        methodName:"RecommendLike",
-                        dishes_id:12555,
-                        size:5,
-                        user_id:0
-                    }
-                }).then((res)=>{
-                    this.doList = res.data.data.data;
-                })
+            return{
+                doList:{}
             }
+        },
+        created(){
+            this.$http.get("http://api.izhangchu.com/",{
+                params:{
+                    methodName:"RecommendLike",
+                    dishes_id:12555,
+                    size:5,
+                    user_id:0
+                }
+            }).then((res)=>{
+                this.doList = res.data.data.data;
+            })
+        },
+        methods: {
+            play() {
+                document.querySelectorAll('video')[0].play();
+                document.querySelector('.shB_banner span').style.display = 'none';
+            }
+        }
 	}
 </script>
 <style scoped>
@@ -312,7 +318,7 @@
 	color:#333;
 	text-align:center;
 	min-width:320px;
-	max-width:640px;
+	/*max-width:640px;*/
 }
 .shB_headA1,.shB_headA2{
 	display:block;

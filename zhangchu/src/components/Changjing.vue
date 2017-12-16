@@ -15,7 +15,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="lxc-main">
+            <Loading/>
+			<div class="lxc-main" v-cloak>
 				<div class="lxc-mainTop">
 					<ul class="clearfixed">
 						<li v-for="item in data">
@@ -38,6 +39,7 @@
 </template>
 
 <script>
+    import Loading from './load'
 	export default {
 		data(){
 			return {
@@ -60,7 +62,10 @@
                 this.data1=res.data.data
 			})
 		},
-         methods:{
+        // components: {
+        //     Loading
+        // },
+        methods:{
             more:function(){
                 this.count++;
                 this.$http.get("http://api.izhangchu.com/",{
@@ -79,6 +84,12 @@
 	}
 </script>
 <style scoped>
+/*.load[v-cloak]{
+    display: none;
+}
+[v-cloak] {
+    display: block;
+}*/
 .clearfixed:after{
     content: ".";
     visibility: hidden;

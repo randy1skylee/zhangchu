@@ -3,7 +3,7 @@
 		<div class="shH_header">
 	        <ul class="sh_clearfixed">
 	            <li><router-link to="/index" class="sh_ell">首页</router-link></li>
-	            <li>></li>
+	            <li></li>
 	            <li><a href="###" class="sh_ell">活动</a></li>
 	        </ul>
 	        <span><a href="###">
@@ -11,6 +11,7 @@
 	        </a></span>
 	    </div>
 	    <div class="headerDown"></div>
+	    <Loading v-if="isShow"/>
 	    <div class="shH_list">
 	        <ul>
 	            <li v-for="item in showList.data">
@@ -36,42 +37,48 @@
 </template>
 
 <script>
+	import Loading from './Load'
 	export default {
-		 data(){
-                return{
-                    showList:{},
-                    num:1
+		data(){
+            return{
+                showList:{},
+                num:1,
+                isShow: true
+            }
+        },
+        created(){
+            this.$http.get("http://api.izhangchu.com/",{
+                params:{
+                    methodName:"ShequActivity",
+                    version:4.3,
+                    page:1,
+                    size:10,
+                    user_id:0
                 }
-            },
-            created(){
-                this.$http.get("http://api.izhangchu.com/",{
+            }).then((res)=>{
+                this.showList = res.data.data;
+                this.isShow = false;
+            })
+        },
+        components: {
+        	Loading
+        },
+        methods:{
+        	addList(){
+        		this.num++;
+        		this.$http.get("http://api.izhangchu.com/",{
                     params:{
                         methodName:"ShequActivity",
                         version:4.3,
-                        page:1,
+                        page:this.num,
                         size:10,
                         user_id:0
-                    }
+                	}
                 }).then((res)=>{
-                    this.showList = res.data.data;
-                })
-            },
-            methods:{
-            	addList(){
-            		this.num++;
-            		this.$http.get("http://api.izhangchu.com/",{
-	                    params:{
-	                        methodName:"ShequActivity",
-	                        version:4.3,
-	                        page:this.num,
-	                        size:10,
-	                        user_id:0
-	                	}
-	                }).then((res)=>{
-	                    this.showList.data = this.showList.data.concat(res.data.data.data);
-	                });
-            	}
-            }
+                    this.showList.data = this.showList.data.concat(res.data.data.data);
+                });
+        	}
+        }
 	}
 </script>
 <style scoped>
@@ -87,7 +94,7 @@
 	box-sizing:border-box;
 	z-index: 2;
 	min-width:320px;
-	max-width:640px;
+	/*max-width:640px;*/
 }
 .shH_header ul{
 	padding-left:.5rem;
