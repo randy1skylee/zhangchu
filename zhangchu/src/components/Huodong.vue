@@ -11,7 +11,7 @@
 	        </a></span>
 	    </div>
 	    <div class="headerDown"></div>
-	    <Loading v-if="isShow"/>
+	    <!-- <Loading v-if="isShow"/> -->
 	    <div class="shH_list">
 	        <ul>
 	            <li v-for="item in showList.data">
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-	import Loading from './Load'
+	// import Loading from './Load'
 	export default {
 		data(){
             return{
@@ -60,9 +60,9 @@
                 this.isShow = false;
             })
         },
-        components: {
-        	Loading
-        },
+        // components: {
+        // 	Loading
+        // },
         methods:{
         	addList(){
         		this.num++;

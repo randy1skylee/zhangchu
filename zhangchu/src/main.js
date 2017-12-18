@@ -6,10 +6,11 @@ import router from './router'
 import axios from 'axios'
 import store from './vuex/store'
 
-import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
+// import MintUI from 'mint-ui'
+// import 'mint-ui/lib/style.css'
 
-Vue.use(MintUI);
+
+// Vue.use(MintUI);
 
 Vue.config.productionTip = false
 

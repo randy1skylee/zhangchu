@@ -1,6 +1,6 @@
 <template>
 	<div id="zhuanti">
-        <v-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="false" ref="loadmore"> 
+        <v-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="false" ref="loadmore" bottomPullText='' topPullText=''> 
 		<div>
 			<div class="lxz-head">
 				<div class="lxz-head1">
@@ -37,7 +37,9 @@
 </template>
 
 <script>
-    import {Loadmore } from 'mint-ui';
+    import {Loadmore} from 'mint-ui';
+   
+
 
 	export default {
         data() {
@@ -96,7 +98,7 @@
                 this.$refs.loadmore.onTopLoaded(); // 固定方法，查询完要调用一次，用于重新定位  
             },
             loadBottom: function() {
-                this.count++;
+                /*this.count++;
                 this.$http.get("http://api.izhangchu.com/",{
                     params:{
                         methodName:"TopicList",
@@ -110,7 +112,7 @@
                 });
                  // 上拉加载  
                 this.more(); // 上拉触发的分页查询  
-                this.$refs.loadmore.onBottomLoaded(); 
+                this.$refs.loadmore.onBottomLoaded(); */
             },
             loadPageList: function() {
                 // // 查询数据  
@@ -157,6 +159,9 @@
 		
 </script>
 <style scoped>
+
+
+
 .clearfixed:after{
     content: ".";
     visibility: hidden;
