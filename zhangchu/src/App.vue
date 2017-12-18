@@ -29,6 +29,9 @@ html{
   font-size: 20px;
   height:100%;
 }
+body{
+  height: 100%;
+}
 .ch-clearfixed:after{
   content:".";
   font-size:0;

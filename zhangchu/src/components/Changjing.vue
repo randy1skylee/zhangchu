@@ -79,6 +79,7 @@
 	}
 </script>
 <style scoped>
+
 .clearfixed:after{
     content: ".";
     visibility: hidden;

@@ -1,5 +1,6 @@
 <template>
 	<div id="zhuanti">
+        <v-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="false" ref="loadmore"> 
 		<div>
 			<div class="lxz-head">
 				<div class="lxz-head1">
@@ -31,33 +32,112 @@
 				<div class="lxz-load" @click="more">还剩下<span class="lxz-num">{{data1.total-count*data1.size}}</span>专题</div>
 			</div>
 		</div>
+        </v-loadmore>  
 	</div>
 </template>
 
 <script>
+    import {Loadmore } from 'mint-ui';
+
 	export default {
-		data(){
-			return {
-				data:[],
+        data() {
+            return {
+                searchCondition:
+                { 
+                    pageNo:"1",
+                    pageSize: "10"
+                },
+                pageList: [],
+                allLoaded: false,
+                scrollMode: "auto" ,
+                data:[],
                 count:1,
                 data1:{}
-			}
-		},
-		created:function(){
-			this.$http.get("http://api.izhangchu.com/",{
-				params:{
-					methodName:"TopicList",
-					version:1.0,
-					user_id:0,
-					page:1,
-					size:10
-				}
-			}).then((res)=>{
-				this.data = res.data.data.data;
+            }
+        },
+        components: {
+            'v-loadmore': Loadmore 
+        },
+        created:function(){
+            this.$http.get("http://api.izhangchu.com/",{
+                params:{
+                    methodName:"TopicList",
+                    version:1.0,
+                    user_id:0,
+                    page:1,
+                    size:10
+                }
+            }).then((res)=>{
+                this.data = res.data.data.data;
                 this.data1=res.data.data
-			})
-		},
-        methods:{
+            })
+        },
+        mounted() {
+            this.loadPageList(); //初次访问查询列表  
+        },
+        methods: {
+            loadTop: function() { //组件提供的下拉触发方法  
+                this.data = [];
+                this.data1= {};
+                this.$http.get("http://api.izhangchu.com/",{
+                params:{
+                    methodName:"TopicList",
+                    version:1.0,
+                    user_id:0,
+                    page:1,
+                    size:10
+                }
+                }).then((res)=>{
+                    this.data = res.data.data.data;
+                    this.data1=res.data.data
+                })
+                //下拉加载  
+                this.loadPageList();
+                this.$refs.loadmore.onTopLoaded(); // 固定方法，查询完要调用一次，用于重新定位  
+            },
+            loadBottom: function() {
+                this.count++;
+                this.$http.get("http://api.izhangchu.com/",{
+                    params:{
+                        methodName:"TopicList",
+                        version:1.0,
+                        user_id:0,
+                        page:this.count,
+                        size:10
+                    }
+                }).then((res)=>{
+                    this.data= this.data.concat(res.data.data.data);
+                });
+                 // 上拉加载  
+                this.more(); // 上拉触发的分页查询  
+                this.$refs.loadmore.onBottomLoaded(); 
+            },
+            loadPageList: function() {
+                // // 查询数据  
+                // this.api.PageList(this.searchCondition).then((data) =>{
+                //     // 是否还有下一页，加个方法判断，没有下一页要禁止上拉  
+                //     this.isHaveMore(data.result.haveMore);
+                //     this.pageList = data.result.pageList;
+                //     this.$nextTick(function() {
+                //         this.scrollMode = "touch";
+                //     });
+                // });
+            },
+            more: function() {
+                // // 分页查询  
+                // this.searchCondition.pageNo = parseInt(this.searchCondition.pageNo) + 1;
+                // this.api.loadPageList(this.searchCondition).then(data =>{
+                //     this.pageList = this.pageList.concat(data.result.pageList);
+                //     this.isHaveMore(data.result.haveMore);
+                // });
+            },
+            isHaveMore: function(isHaveMore) {
+                // // 是否还有下一页，如果没有就禁止上拉刷新  
+                // this.allLoaded = true; //true是禁止上拉加载  
+                // if (isHaveMore) {
+                //     this.allLoaded = false;
+                // }
+            },
             more:function(){
                 this.count++;
                 this.$http.get("http://api.izhangchu.com/",{
@@ -73,7 +153,8 @@
                 })
             }
         }
-	}
+    }
+		
 </script>
 <style scoped>
 .clearfixed:after{
