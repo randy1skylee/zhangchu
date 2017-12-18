@@ -11,8 +11,8 @@
 	        </a></span>
 	    </div>
 	    <div class="headerDown"></div>
-	    <!-- <Loading v-if="isShow"/> -->
-	    <div class="shH_list">
+	    <h2 class="load" v-if = 'isShow'>Loding......</h2>
+	    <div class="shH_list" v-else>
 	        <ul>
 	            <li v-for="item in showList.data">
 	                <router-link to="/huobottom">
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-	// import Loading from './Load'
 	export default {
 		data(){
             return{
@@ -60,9 +59,6 @@
                 this.isShow = false;
             })
         },
-        // components: {
-        // 	Loading
-        // },
         methods:{
         	addList(){
         		this.num++;
@@ -79,10 +75,23 @@
                 });
         	}
         }
+
 	}
 </script>
 <style scoped>
+h2{
+	width: 100%;
+	height: 30vh;
+	text-align: center;
+	margin-top: 5rem;
+}
+
+
 /*.....头部......*/
+
+
+
+
 .shH_header{
 	height: 2.2rem;
 	line-height:2.2rem;
