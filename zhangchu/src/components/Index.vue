@@ -388,7 +388,7 @@
             <div class="ch-foodList" v-show = "slogo">
             	<ul>
             		<li v-for = "item in foodlist">
-            			<a href="#">{{item.text}}</a>
+            			<router-link to = "/meifood">{{item.text}}</router-link>
             		</li>
             	</ul>
             </div>
