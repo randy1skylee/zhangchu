@@ -292,8 +292,17 @@
         },
         methods: {
             play() {
-                document.querySelectorAll('video')[0].play();
-                document.querySelector('.shB_banner span').style.display = 'none';
+                var type_text = window.navigator.connection.effectiveType;
+                if(type_text == "4g"){
+                    var r = confirm("当前处于移动数据状态，是否播放");
+
+                     if (r == true) {
+                        document.querySelectorAll('video')[0].play();
+                        document.querySelector('.shB_banner span').style.display = 'none';
+                     }
+                }else{
+                    document.querySelectorAll('video')[0].play();
+                }
             }
         }
 	}
