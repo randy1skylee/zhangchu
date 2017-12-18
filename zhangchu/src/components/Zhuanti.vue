@@ -60,7 +60,8 @@
         components: {
             'v-loadmore': Loadmore 
         },
-        created:function(){
+        
+        mounted() {
             this.$http.get("http://api.izhangchu.com/",{
                 params:{
                     methodName:"TopicList",
@@ -69,13 +70,11 @@
                     page:1,
                     size:10
                 }
-            }).then((res)=>{
-                this.data = res.data.data.data;
-                this.data1=res.data.data
+                }).then((res)=>{
+                    this.data = res.data.data.data;
+                    this.data1=res.data.data
             })
-        },
-        mounted() {
-            this.loadPageList(); //初次访问查询列表  
+            // this.loadPageList(); //初次访问查询列表  
         },
         methods: {
             loadTop: function() { //组件提供的下拉触发方法  
@@ -98,7 +97,7 @@
                 this.$refs.loadmore.onTopLoaded(); // 固定方法，查询完要调用一次，用于重新定位  
             },
             loadBottom: function() {
-                /*this.count++;
+                this.count++;
                 this.$http.get("http://api.izhangchu.com/",{
                     params:{
                         methodName:"TopicList",
@@ -112,7 +111,7 @@
                 });
                  // 上拉加载  
                 this.more(); // 上拉触发的分页查询  
-                this.$refs.loadmore.onBottomLoaded(); */
+                this.$refs.loadmore.onBottomLoaded(); 
             },
             loadPageList: function() {
                 // // 查询数据  
