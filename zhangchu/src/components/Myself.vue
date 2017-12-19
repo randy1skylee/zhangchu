@@ -60,7 +60,7 @@
 				</router-link>
 				<router-link to="/index">
 					<div class="lxm-hongbao lxm-tuichu">
-						<div class="lxm-my-hb">
+						<div class="lxm-my-hb" @click = "tuichu()">
 							退出登陆
 						</div>
 					</div>
@@ -74,6 +74,13 @@
 		mounted(){
             //添加修改state数据
             this.$store.dispatch("addDate",new Date());
+        },
+        methods: {
+            tuichu() {
+                if(confirm("确定要退出么")){
+                    sessionStorage.favour = ""
+                }
+            }
         }
 	}
 </script>

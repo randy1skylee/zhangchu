@@ -27,6 +27,8 @@ import Huodong from '@/components/Huodong'
 import Huobottom from '@/components/Huobottom'
 import Xinshou from '@/components/Xinshou'
 import Shipin from '@/components/Shipin'
+import Denglu from '@/components/denglu'
+import Zhuce from '@/components/zhuce'
 
 Vue.use(Router)
 
@@ -38,6 +40,9 @@ export default new Router({
     }, {
       path: '/myself',
       component: Myself
+    },{
+      path:'/index/*',
+      component:Index
     },{
       path:'/index',
       component:Index
@@ -113,6 +118,12 @@ export default new Router({
     },{
       path:'/shipin',
       component:Shipin
+    },{
+      path:'/denglu',
+      component:Denglu
+    },{
+      path:'/zhuce',
+      component:Zhuce
     }
   ],
   scrollBehavior (to, from, savedPosition) {  

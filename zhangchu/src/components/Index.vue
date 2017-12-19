@@ -14,7 +14,9 @@
 	    		</div>
 	    	</div>
 	    	<div class="ch-person">
-	    		<span><router-link to="/myself"><img src="http://pub.szzhangchu.com/web/v4.2/images/login-white.png"></router-link></span>
+
+	    		<span v-if = 'show'><router-link to="/myself"><img src="http://img.szzhangchu.com/1445429526387_9171386134.jpg@48h_48w_1e_1c.jpg"></router-link></span>
+	    		<span v-else><router-link to="/denglu"><img src="http://pub.szzhangchu.com/web/v4.2/images/login-white.png"></router-link></span>
 	    	</div>
 	    </div>
 	    <div class="ch-table">
@@ -333,7 +335,7 @@
 	            </a>
 	        </div>
 	    </div>
-	    <div class="ch-endup">
+	    <div class="ch-endup" v-show = "isShow">
 	        <div class="ch-endall">
 	            <div class="ch-endlogo">
 	                <img src="http://pub.szzhangchu.com/web/v4.2/images/logo.png">
@@ -354,14 +356,36 @@
 
 <script>
 	export default {
+		data(){
+			return {
+				show: this.$route.params[0] || false,
+				isShow: true
+			}
+		},
+		created: function(){
+			// console.log(this.$router.params.id)
+			if(this.$route.params.id === "false") {
+				this.show = this.$route.params.id
+			}
+			if(sessionStorage.favour !== undefined){
+				if(sessionStorage.favour.length>0){
+					this.show = sessionStorage.favour
+				}
+			}
+			
+		},
 		methods:{
 			hide:function(){
-				document.querySelector(".ch-endup").style.display="none"
+				this.isShow = false
 			}
 		}
 	}
 </script>
 <style scoped>
+.ch-person img{
+	border-radius: 50%;
+}
+
 .ch-header{
 	width:100%;
 	height:2.2rem;
