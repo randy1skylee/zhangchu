@@ -10,7 +10,7 @@
                 <div class="ch-mfood2 ch-shicai2">
                     <ul>
                         <li class="ch-lione ch-lizero"><a href="#">菜谱</a></li>
-                        <li class="ch-zero0"><a href="#">食材</a></li>
+                        <li class="ch-zero0"><router-link to = '/shicai'>食材</router-link></li>
                     </ul>
                 </div>
                 <div class="ch-mfood4 class=ch-shicai4">
