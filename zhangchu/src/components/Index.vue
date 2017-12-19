@@ -7,7 +7,7 @@
 	    	<div class="ch-midsearch">
 	    		<div class="ch-middle">
 	    			<div class="ch-midinner">
-	    				<div class="ch-holder">
+	    				<div class="ch-holder" @click = "search()">
 	    					<i>11</i>请输入菜名或者食材搜索
 	    				</div>
 	    			</div>
@@ -351,6 +351,50 @@
 	            </div>
 	        </div>
 	    </div>
+
+		<div class="ch-header ch-sousuo" v-show = "flag">
+	    	<div class="ch-logo">
+	    		<span @click = "disappear()"><a href="#"><img src="http://pub.szzhangchu.com/web/v4.2/images/ico/ico-back-black.png"></a></span>
+	    	</div>
+	    	<div class="ch-midsearch">
+	    		<div class="ch-middle">
+	    			<div class="ch-midinner">
+	    				<div class="ch-holder ch-reholder">
+	    					<i>11</i>
+	    					<input type="text" placeholder="请输入菜名或者食材搜索" @keyup = "showfood()" v-model = "zimu">
+	    					</input>
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="ch-person">
+	    		<span>搜索</span>
+	    	</div>
+            <div class="ch-secondone">
+	    	<div class="ch-soulist">
+	    	    <p>热门搜索</p>
+	    		<ul>
+	    			<li v-for = "item in datalist">
+	    			<router-link to = "/xuanji">{{item.text}}
+	    			</router-link>
+	    			</li>
+	    		</ul>
+	    	</div>
+	    	<div class="ch-history">
+	    		<p>历史搜索</p>
+	    		<ul>
+	    			<li>暂无搜索历史</li>
+	    		</ul>
+	    	</div>
+            </div>
+            <div class="ch-foodList" v-show = "slogo">
+            	<ul>
+            		<li v-for = "item in foodlist">
+            			<router-link to = "/meifood">{{item.text}}</router-link>
+            		</li>
+            	</ul>
+            </div>
+	    </div>
 	</div>
 </template>
 
@@ -359,7 +403,12 @@
 		data(){
 			return {
 				show: this.$route.params[0] || false,
-				isShow: true
+				isShow: true,
+				flag : false,
+	    		slogo :false,
+	    		zimu:'',
+	    		datalist : {},
+	    		foodlist :{}
 			}
 		},
 		created: function(){
@@ -377,7 +426,41 @@
 		methods:{
 			hide:function(){
 				this.isShow = false
+			},
+			search:function(){
+				this.flag = true;
+			},
+			disappear:function(){
+                this.flag = false;
+			},
+			showfood:function(){
+				var _t = this;
+				this.slogo = true;
+				this.$http.get("http://api.izhangchu.com/",{
+				params:{
+                  methodName:"SearchKeyword",
+					keyword:_t.zimu,
+					user_id:0
+				}
+				}).then((res)=>{
+					this.foodlist = res.data.data.data;
+					// console.log(this.foodlist);
+				})
+			},
+			created:function(){
+				var _t = this;
+				this.$http.get("http://api.izhangchu.com/",{
+					params:{
+	                  methodName:"SearchHot",
+						size:10,
+						user_id:0
+					}
+				}).then((res)=>{
+					this.datalist = res.data.data.data;
+					console.log(this.datalist);
+				});
 			}
+
 		}
 	}
 </script>
@@ -410,11 +493,14 @@
 }
 .ch-person{
 	right: 0;
+	font-size: 0.65rem;
 }
 .ch-logo span,.ch-person span{
 	width:100%;
 	height:100%;
 	display:inline-block;
+	text-align: center;
+	color:#828282;
 
 }
 .ch-logo a,.ch-person a{
@@ -919,5 +1005,102 @@ background-size:cover;
 	position: absolute;
 	right:3%;
 	top:45%;
+}
+/*搜索页面*/
+
+ .ch-sousuo{
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		width: 100%;
+		height: 100%;
+		background: white;
+	}
+.ch-reholder{
+	background-color: #e6e6e6;
+	/*margin-right: 0.5rem;*/
+}
+.ch-reholder input{
+	outline: none;
+	border:none;
+	background-color: #e6e6e6;
+	color:#5d5d5d;
+}
+.ch-soulist{
+	background-color: #fff;
+	padding-bottom: 0.2rem;
+}
+.ch-soulist ul{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0.5rem;
+}
+.ch-soulist ul li{
+	/*width:20%;*/
+}
+.ch-soulist ul li a{
+	
+    display: block;
+  
+    border: 1px solid #ff8f5c;
+    color: #5d5d5d;
+    border-radius: 3px;
+    /*width:2rem;*/
+    text-align: center;
+    height:1.5rem;
+    line-height: 1.5rem;
+    font-size: 0.6rem;
+    margin: 0.2rem;
+    padding:0 0.75rem;
+}
+.ch-soulist p{
+	margin-left: 1.2rem;
+    font-size: .6rem;
+    color:#828282;
+}
+.ch-history{
+	background-color: #fff;
+	margin-top: 0.3rem;
+}
+.ch-history p{
+	margin-left: 1.2rem;
+	color:#828282;
+	font-size: .6rem;
+}
+.ch-history li {
+	font-size: .6rem;
+	text-align: center;
+}
+.ch-secondone{
+	width:100%;
+	height:100%;
+	background-color:#e6e6e6; 
+	padding-top: 0.3rem;
+}
+.ch-foodList{
+	position: fixed;
+	width:100%;
+	left:0;
+	top:2.5rem;
+	background-color: #fff;
+}
+.ch-foodList ul{
+	width:100%;
+	margin-left: 5%;
+}
+.ch-foodList li{
+	width:90%;
+	height:2rem;
+	line-height: 2rem;
+	border-bottom: 1px solid #bbb;
+	padding-left: 1rem;
+}
+.ch-foodList li a{
+	 color:#828282;
+	 font-size: 0.8rem;
+}
+.ch-foodList li:last-of-type{
+  border-bottom: none;
 }
 </style>
