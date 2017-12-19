@@ -2,7 +2,7 @@
 	<div id="index">
 		<div class="ch-header">
 	    	<div class="ch-logo">
-	    		<span><a href="#"><img src="http://pub.szzhangchu.com/web/v4.2/images/logo-white.png"></a></span>
+	    		<span @click = call(10086)><a href="#"><img src="http://pub.szzhangchu.com/web/v4.2/images/logo-white.png"></a></span>
 	    	</div>
 	    	<div class="ch-midsearch">
 	    		<div class="ch-middle">
@@ -504,6 +504,10 @@
 					this.foodlist = res.data.data.data;
 					// console.log(this.foodlist);
 				})
+			},
+			call(msg){
+				window.location.href="tel:"+msg;
+				console.log(msg)
 			}
 		}
 	}
