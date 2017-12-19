@@ -22,7 +22,10 @@
     "readable-stream": "^2.3.3",
     "source-map": "^0.6.1",
     "spdy-transport": "^2.0.20",
+    "swiper": "^4.0.7",
     "vue": "^2.5.2",
+    "vue-awesome": "^2.3.4",
+    "vue-awesome-swiper": "^3.0.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
