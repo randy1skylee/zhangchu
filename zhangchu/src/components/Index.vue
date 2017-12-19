@@ -468,6 +468,17 @@
 					this.show = sessionStorage.favour
 				}
 			}
+			var _t = this;
+			this.$http.get("http://api.izhangchu.com/",{
+				params:{
+                  methodName:"SearchHot",
+					size:10,
+					user_id:0
+				}
+			}).then((res)=>{
+				this.datalist = res.data.data.data;
+				// console.log(this.datalist);
+			});
 			
 		},
 		methods:{
@@ -494,19 +505,9 @@
 					// console.log(this.foodlist);
 				})
 			},
-			created:function(){
-				var _t = this;
-				this.$http.get("http://api.izhangchu.com/",{
-					params:{
-	                  methodName:"SearchHot",
-						size:10,
-						user_id:0
-					}
-				}).then((res)=>{
-					this.datalist = res.data.data.data;
-					console.log(this.datalist);
-				});
-			}
+			/*created:function(){
+				
+			}*/
 
 		}
 	}
