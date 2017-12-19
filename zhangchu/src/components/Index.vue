@@ -435,15 +435,25 @@
 	    		datalist : {},
 	    		foodlist :{},
 	    		swiperOption: {
-                    initialSlide:0,//设定初始化时slide的索引
-                    direction:'horizontal',//Slides的滑动方向，可设置水平(horizontal)或垂直(vertical)。
-                    loop: false,  //无限滚动
-                    speed:800,//滑动速度
-                    autoplay:2000,//自动切换的时间间隔
-                    onSlideChangeEnd: swiper => { //滑动之后回调函数
-                        //切换结束时，告诉我现在是第几个slide
-                        // console.log('onSlideChangeEnd', swiper.realIndex)
-                    } 
+	    			   autoplay: {
+                        stopOnLastSlide: false, 
+                        disableOnInteraction: false
+                    },
+                    pagination: {
+                    el: '.swiper-pagination',
+                    clickable :true
+                    },
+                    loop : true
+
+                    // initialSlide:0,//设定初始化时slide的索引
+                    // direction:'horizontal',//Slides的滑动方向，可设置水平(horizontal)或垂直(vertical)。
+                    // loop: false,  //无限滚动
+                    // speed:800,//滑动速度
+                    // autoplay:2000,//自动切换的时间间隔
+                    // onSlideChangeEnd: swiper => { //滑动之后回调函数
+                    //     //切换结束时，告诉我现在是第几个slide
+                    //     // console.log('onSlideChangeEnd', swiper.realIndex)
+                    // } 
               }   
 
 			}
