@@ -9,7 +9,7 @@
                 </div>
                 <div class="ch-mfood2 ch-shicai2">
                     <ul>
-                        <li class="ch-lizero" style="width:3.7rem"><a href="#">菜谱</a></li>
+                        <li class="ch-lizero" style="width:3.7rem"><router-link to = "/wandao">菜谱</router-link></li>
                         <li class="ch-litwo ch-zero0"  style="width:3.7rem"><a href="#">食材</a></li>
                     </ul>
                 </div>
