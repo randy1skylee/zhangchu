@@ -504,11 +504,7 @@
 					this.foodlist = res.data.data.data;
 					// console.log(this.foodlist);
 				})
-			},
-			/*created:function(){
-				
-			}*/
-
+			}
 		}
 	}
 </script>

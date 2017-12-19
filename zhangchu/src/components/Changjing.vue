@@ -15,7 +15,7 @@
 					</div>
 				</div>
 			</div>
-            <Loading/>
+            <!-- <Loading/> -->
 			<div class="lxc-main" v-cloak>
 				<div class="lxc-mainTop">
 					<ul class="clearfixed">
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-    import Loading from './load'
+   
 	export default {
 		data(){
 			return {
