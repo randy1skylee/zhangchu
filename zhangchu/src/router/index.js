@@ -41,7 +41,7 @@ export default new Router({
       path: '/myself',
       component: Myself
     },{
-      path:'/index/*',
+      path:'/index/:id',
       component:Index
     },{
       path:'/index',

@@ -427,7 +427,7 @@
 	export default {
 		data(){
 			return {
-				show: this.$route.params[0] || false,
+				show: this.$route.params.id || false,
 				isShow: true,
 				flag : false,
 	    		slogo :false,
