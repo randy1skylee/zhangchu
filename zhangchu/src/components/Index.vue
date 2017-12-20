@@ -37,23 +37,23 @@
 	        <div>
 	           <swiper :options="swiperOption" ref="mySwiper">
                 <swiper-slide>
-                    <router-link to="lidong">
-                    <img src=http://img.szzhangchu.com/1507878956959_4652279158.jpg@640w_320h_1e_1c.jpg>
+                    <router-link to="/xinwen">
+                    <img src='http://img.szzhangchu.com/1507878956959_4652279158.jpg@640w_320h_1e_1c.jpg'>
                     </router-link>
                 </swiper-slide>
                  <swiper-slide>
-                    <router-link to="health">
-                    <img src=http://img.szzhangchu.com/1509962292140_6777014907.jpg@640w_320h_1e_1c.jpg>
+                    <router-link to="/jiankang">
+                    <img src='http://img.szzhangchu.com/1509962292140_6777014907.jpg@640w_320h_1e_1c.jpg'>
                     </router-link>
                 </swiper-slide>
                  <swiper-slide>
-                    <router-link to="meifood">
-                    <img src=http://img.szzhangchu.com/1509961164984_9932104407.jpg@640w_320h_1e_1c.jpg>
+                    <router-link to="/meifood">
+                    <img src='http://img.szzhangchu.com/1509961164984_9932104407.jpg@640w_320h_1e_1c.jpg'>
                     </router-link>
                 </swiper-slide>
                 <swiper-slide>
-                    <router-link to="bofang">
-                    <img src=http://img.szzhangchu.com/1509961826485_6352016470.jpg@640w_320h_1e_1c.jpg>
+                    <router-link to="/bofang">
+                    <img src='http://img.szzhangchu.com/1509961826485_6352016470.jpg@640w_320h_1e_1c.jpg'>
                     </router-link>
                 </swiper-slide>
                 <div class="swiper-pagination"  slot="pagination"></div>

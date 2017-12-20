@@ -61,7 +61,7 @@
             'v-loadmore': Loadmore 
         },
         
-        mounted() {
+        created() {
             this.$http.get("http://api.izhangchu.com/",{
                 params:{
                     methodName:"TopicList",
