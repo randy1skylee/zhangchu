@@ -115,29 +115,15 @@
             },
             loadPageList: function() {
                 // // 查询数据  
-                // this.api.PageList(this.searchCondition).then((data) =>{
-                //     // 是否还有下一页，加个方法判断，没有下一页要禁止上拉  
-                //     this.isHaveMore(data.result.haveMore);
-                //     this.pageList = data.result.pageList;
-                //     this.$nextTick(function() {
-                //         this.scrollMode = "touch";
-                //     });
-                // });
+                
             },
             more: function() {
                 // // 分页查询  
-                // this.searchCondition.pageNo = parseInt(this.searchCondition.pageNo) + 1;
-                // this.api.loadPageList(this.searchCondition).then(data =>{
-                //     this.pageList = this.pageList.concat(data.result.pageList);
-                //     this.isHaveMore(data.result.haveMore);
-                // });
+               
             },
             isHaveMore: function(isHaveMore) {
                 // // 是否还有下一页，如果没有就禁止上拉刷新  
-                // this.allLoaded = true; //true是禁止上拉加载  
-                // if (isHaveMore) {
-                //     this.allLoaded = false;
-                // }
+               
             },
             more:function(){
                 this.count++;
